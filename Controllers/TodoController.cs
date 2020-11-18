@@ -9,16 +9,16 @@ namespace TodoApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class TodoController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<TodoController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public TodoController(ILogger<TodoController> logger)
         {
             _logger = logger;
         }
