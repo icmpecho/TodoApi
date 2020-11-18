@@ -27,5 +27,20 @@ namespace TodoApi.Controllers
             var result = await _todoService.ListTodos();
             return Ok(result);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<TodoItemVm>> Create(CreateTodoItemRequest request)
+        {
+            var result = await _todoService.AddTodo(request.Name);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("complete")]
+        public async Task<ActionResult<TodoItemVm>> Complete(CompleteTodoItemRequest request)
+        {
+            var result = await _todoService.MarkAsDone(request.Id);
+            return Ok(result);
+        }
     }
 }
