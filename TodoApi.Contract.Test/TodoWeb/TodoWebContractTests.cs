@@ -17,7 +17,10 @@ namespace TodoApi.Test.TodoWeb
                 .ConfigureWebHostDefaults(
                     webBuilder =>
                     {
-                        webBuilder.UseStartup<Startup>();
+                        webBuilder.UseStartup<ContractTestStartup>();
+                        webBuilder.UseSetting(
+                            WebHostDefaults.ApplicationKey,
+                            typeof(Startup).Assembly.GetName().Name);
                     })
                 .Build();
             _host.Start();
@@ -26,9 +29,11 @@ namespace TodoApi.Test.TodoWeb
         [Test]
         public void PactVerify()
         {
+            const string providerBaseUri = "http://localhost:5000";
             IPactVerifier pactVerifier = new PactVerifier(new PactVerifierConfig());
             pactVerifier
-                .ServiceProvider("TodoApi", "http://localhost:5000")
+                .ProviderState($"{providerBaseUri}{Constants.ProviderStateEndpoint}")
+                .ServiceProvider("TodoApi", providerBaseUri)
                 .HonoursPactWith("todo-web")
                 .PactUri("/Users/psilpsakulsu/workspace/todo-web/pact/pacts/todo-web-todoapi.json")
                 .Verify();

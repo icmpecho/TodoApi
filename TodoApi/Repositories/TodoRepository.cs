@@ -32,5 +32,11 @@ namespace TodoApi.Repositories
             var item = await Get(id);
             _todoItems = _todoItems.Remove(item);
         }
+
+        public Task Clear()
+        {
+            _todoItems = ImmutableList<TodoItem>.Empty;
+            return Task.CompletedTask;
+        }
     }
 }

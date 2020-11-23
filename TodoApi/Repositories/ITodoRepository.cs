@@ -11,5 +11,6 @@ namespace TodoApi.Repositories
         Task Update(TodoItem item);
         Task<TodoItem> Get(string id);
         Task Delete(string id);
+        Task Clear();
     }
 }
